@@ -28,7 +28,7 @@
   <a href="#从源码编译">编译</a>
 </p>
 
-<img src="docs/screenshot.png" width="820" alt="FastNote 主界面">
+<img src="docs/demo.gif" width="780" alt="FastNote 演示：记下、完成、拖到标签、按标签筛选、搁置、按周查看、回答问题">
 
 </div>
 
@@ -51,7 +51,7 @@
 
 - Shift+Enter 换行，Ctrl+Enter 记下并收起窗口。
 - 可以贴图片：直接 Ctrl+V，或者点输入框左下角的图片按钮。截图可以直接贴进来。
-- 没写完就关掉窗口也没关系，草稿会自动保存，下次打开还在。
+- 没写完就关掉窗口，草稿会留着，下次打开还在。
 - 输入框下面那条短横线可以上下拖，调整输入框高度。
 
 ## 完成和恢复
@@ -169,13 +169,7 @@
 6. 标签（转义同第 3 列）
 7. 摘要（转义同第 3 列）
 
-后面几列都是空的时候可以不写。写文件时先写临时文件再替换，写到一半断电也不会坏。
-
-### 从 Scratchpad 升级
-
-1.0 以前这个程序叫 Scratchpad，数据在 `%LOCALAPPDATA%\Scratchpad`。FastNote 第一次启动时会把旧数据复制过来，旧文件夹不动，确认没问题后可以自己删掉。如果旧版还开着，FastNote 会先让它退出。
-
-旧版不认识问题和回答，用旧版保存一次就会把它们丢掉，所以升级之后就别再开旧版了。
+后面几列都是空的时候可以不写。
 
 ## 从源码编译
 
@@ -197,7 +191,7 @@ dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=
 
 ### 自测
 
-自测只用你指定的文件夹，不碰正式数据：
+自测的数据放在 `--data-dir` 指定的文件夹里：
 
 ```
 FastNote.exe --selftest --data-dir=C:\temp\fn-store
@@ -206,8 +200,9 @@ FastNote.exe --exit --instance=test
 ```
 
 - `--selftest` 把 `ideas.tsv` 和 `layout.ini` 写一遍再读回来，结果在数据文件夹的 `selftest.txt` 里，每项都应该是 `True`。
-- `--uitest` 把窗口放在屏幕外跑，不抢焦点，也不出现在任务栏。数据文件夹是空的时，会先写入一组示例事项。`--uitest-drag` 会跑一遍拖动、完成、回答，截图和 `drag-selftest.txt` 存到指定文件夹，第一行是 `ALL PASS` 就是都通过了。跑完用 `--exit --instance=test` 关掉。
-- `--uitest-capture=文件.png` 只截一张主窗口，README 里的截图就是这样来的。
+- `--uitest` 在屏幕外开一个窗口跑。数据文件夹是空的时，会先写入一组示例事项。`--uitest-drag` 会跑一遍拖动、完成、回答，截图和 `drag-selftest.txt` 存到指定文件夹，第一行是 `ALL PASS` 就是都通过了。跑完用 `--exit --instance=test` 关掉。
+- `--uitest-demo=文件夹` 用示例数据演一遍记下、完成、归类、搁置、回答，每 40 毫秒存一帧。
+- `--uitest-capture=文件.png` 只截一张主窗口。
 
 ## 许可
 

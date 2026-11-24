@@ -28,7 +28,7 @@
   <a href="#building">Building</a>
 </p>
 
-<img src="docs/screenshot.png" width="820" alt="FastNote">
+<img src="docs/demo.gif" width="780" alt="FastNote demo: write, finish, tag, filter by tag, shelve, view by week, answer a question">
 
 </div>
 
@@ -170,13 +170,7 @@ Everything is in `%LOCALAPPDATA%\FastNote`; paste that into the Explorer address
 6. Tag (escaped like column 3)
 7. Summary (escaped like column 3)
 
-Trailing empty columns may be left out. Files are written to a temporary file first and then swapped in, so a power cut cannot leave half a file.
-
-### Upgrading from Scratchpad
-
-Before 1.0 the app was called Scratchpad and kept its data in `%LOCALAPPDATA%\Scratchpad`. On its first start FastNote copies that data over and leaves the old folder alone; delete it yourself once you are happy. If the old version is still running, FastNote asks it to quit first.
-
-The old version does not know about questions and answers and drops them the next time it saves, so do not go back to it after upgrading.
+Trailing empty columns may be left out.
 
 ## Building
 
@@ -198,7 +192,7 @@ Ship `FastNote.exe` together with the `Fonts` folder from `publish`.
 
 ### Self-tests
 
-They only touch the folders you give them, never your real data:
+Each test keeps its data in the folder passed with `--data-dir`:
 
 ```
 FastNote.exe --selftest --data-dir=C:\temp\fn-store
@@ -207,8 +201,9 @@ FastNote.exe --exit --instance=test
 ```
 
 - `--selftest` writes `ideas.tsv` and `layout.ini` and reads them back; the result is in `selftest.txt` in the data folder, and every value should be `True`.
-- `--uitest` runs the window off screen, without taking focus or showing up in the taskbar. An empty data folder is filled with sample items first. `--uitest-drag` goes through dragging, finishing and answering, and writes screenshots and `drag-selftest.txt` to the folder you name; a first line of `ALL PASS` means everything passed. Close it afterwards with `--exit --instance=test`.
-- `--uitest-capture=file.png` takes a single screenshot of the main window, which is how the pictures in this README were made.
+- `--uitest` runs the window off screen. An empty data folder is filled with sample items first. `--uitest-drag` goes through dragging, finishing and answering, and writes screenshots and `drag-selftest.txt` to the folder you name; a first line of `ALL PASS` means everything passed. Close it afterwards with `--exit --instance=test`.
+- `--uitest-demo=folder` plays a short session on the sample data (write, finish, tag, shelve, answer) and saves a frame every 40 ms.
+- `--uitest-capture=file.png` takes a single screenshot of the main window.
 
 ## License
 
