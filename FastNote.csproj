@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>FastNote</AssemblyName>
+    <RootNamespace>FastNote</RootNamespace>
+    <StartupObject>FastNote.Program</StartupObject>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+
+    <Version>1.0.0</Version>
+    <Product>FastNote</Product>
+    <Description>Windows 上的待办和随手记工具</Description>
+    <Copyright>Copyright (c) 2026 huang zhang</Copyright>
+    <!-- no "+commit" suffix in the version shown under 关于 -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <!-- release package: one compressed exe, no debug symbols -->
+  <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="app.ico" />
+    <!-- The font is loaded from Fonts\ next to the exe, so it stays outside a single-file bundle. -->
+    <None Include="Fonts\*.*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Update="LICENSE;THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+</Project>
